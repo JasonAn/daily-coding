@@ -11,6 +11,7 @@ public:
     void read() {
         std::cin >> n;
         parent.resize(n);
+        heights.resize(n);
         for (int i = 0; i < n; i++) {
             std::cin >> parent[i];
             heights[i] = 0;
@@ -25,21 +26,32 @@ public:
 
             int i = vertex;
 
-            if (i != -1 && heights[parent[i]] > 0) {
+            while (i != -1){
+                if (heights[parent[i]] > 0){
+                    //std::cout << parent[i] << std::endl;
                     height += heights[parent[i]] + 1;
-                    break;
+                    break;}
+                else {
+//                    std::cout << parent[i] << std::endl;
+                    height++;
+                    i = parent[i];
+                    }
             }
-            else if(i != -1 && heights[parent[i]] == 0) {
-                height++;
-                i = parent[i];
-                }
 
             heights[i] = height;
-
-            maxHeight = std::max(maxHeight, height);
+            write();
+            //maxHeight = std::max(maxHeight, height);
+            //std::cout << maxHeight << std::endl;
         }
         return maxHeight;
     }
+
+    void write(){
+        for (auto i = 0; i < n; i++)
+            std::cout << heights[i] << " ";
+        std::cout << std::endl;
+    }
+
 };
 
 int main() {
@@ -47,5 +59,6 @@ int main() {
     TreeHeight tree;
     tree.read();
     std::cout << tree.compute_height() << std::endl;
+    return 0;
 }
 
