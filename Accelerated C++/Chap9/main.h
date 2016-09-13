@@ -10,8 +10,8 @@
 
 class Student_info {
 public:
-    Student_info(): midterm(0), final(0);
-    Student_info(std::istream&);
+    Student_info(): midterm(0), final(0) {};
+    Student_info(std::istream& is ) { read (is)};
 
     double grade() const;
     std::istream& read(std::istream&);
